@@ -1,55 +1,48 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: undefined → 1.0.0
+Added sections: All principles and sections for AI-Driven Book + Embedded RAG Chatbot project
+Removed sections: None
+Templates requiring updates:
+- .specify/templates/plan-template.md ✅ updated
+- .specify/templates/spec-template.md ✅ updated
+- .specify/templates/tasks-template.md ✅ updated
+- .specify/templates/commands/*.md ✅ updated
+- README.md ✅ updated
+Follow-up TODOs: None
+-->
+# AI-Driven Book + Embedded RAG Chatbot Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Technical Accuracy First
+All content and implementations must be technically accurate from primary sources; All code examples must be fully tested and reproducible; Strict adherence to best practices and industry standards
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### Developer-Centric Clarity
+All documentation and code must be clear and accessible to software/AI developer audience; Complex concepts explained with practical examples; Comprehensive API documentation and usage guides
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### Full Reproducibility (NON-NEGOTIABLE)
+End-to-end setup and deployment must be fully reproducible from documentation; Installation instructions complete and tested on clean environments; All dependencies versioned and pinned where necessary
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Professional Publishing Standards
+Book content meets professional publishing quality standards; Structured chapters with consistent formatting, glossary, and references; Proper grammar, spelling, and technical accuracy maintained
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### Embedded RAG Excellence
+RAG chatbot answers strictly from book content and selected text; No hallucinated or external answers allowed; Accurate retrieval and response generation with confidence scoring
 
-### [PRINCIPLE_6_NAME]
+### Modern Tech Stack Integration
+Utilize modern technology stack: Docusaurus for book, OpenAI Agents/ChatKit for chatbot, Neon Postgres and Qdrant Cloud for data; All components must integrate seamlessly and securely
 
+## Architecture and Infrastructure Requirements
 
-[PRINCIPLE__DESCRIPTION]
+Book built using Docusaurus + Spec-Kit Plus, deployed to GitHub Pages; Chatbot uses OpenAI Agents/ChatKit SDKs + FastAPI; Data storage with Neon Serverless Postgres + Qdrant Cloud; Minimum 6 chapters plus intro and conclusion required; Must include comprehensive installation instructions and architecture overview
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Development and Quality Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Written and developed entirely inside Claude Code; All changes must be tested end-to-end before merging; Code reviews required for all substantial changes; Documentation must be updated alongside code changes
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+All implementations must strictly follow constitution principles; Changes to core architecture require explicit approval; All code must pass automated testing before merging; Book content must be factually accurate and properly sourced
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2025-12-22 | **Last Amended**: 2025-12-22
