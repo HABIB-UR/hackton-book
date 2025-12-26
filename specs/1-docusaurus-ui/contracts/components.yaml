@@ -1,0 +1,88 @@
+# Contract: Docusaurus Theme Component Interfaces
+
+## Custom Navbar Component Contract
+
+### Interface
+```typescript
+interface NavbarProps {
+  title: string;
+  logo: {
+    alt: string;
+    src: string;
+  };
+  items: NavbarItem[];
+}
+
+interface NavbarItem {
+  type: 'doc' | 'docsVersion' | 'locale' | 'search' | 'custom' | 'dropdown';
+  position: 'left' | 'right';
+  label?: string;
+  to?: string;
+  href?: string;
+  activeBasePath?: string;
+}
+```
+
+### Behavior
+- Must maintain accessibility attributes (aria labels, keyboard navigation)
+- Should support mobile-responsive hamburger menu
+- Must preserve existing navigation functionality
+
+## Custom Sidebar Component Contract
+
+### Interface
+```typescript
+interface SidebarProps {
+  isHidden: boolean;
+  items: SidebarItem[];
+  className?: string;
+}
+
+interface SidebarItem {
+  type: 'category' | 'doc' | 'link';
+  label: string;
+  href?: string;
+  items?: SidebarItem[];
+  collapsed?: boolean;
+  collapsible?: boolean;
+}
+```
+
+### Behavior
+- Must support expand/collapse functionality for categories
+- Should maintain scroll position when navigating
+- Must preserve existing documentation structure
+
+## CSS Customization Contract
+
+### Variables
+```css
+:root {
+  /* Typography */
+  --ifm-font-family-base: [font-family];
+  --ifm-font-size-base: [size];
+  --ifm-line-height-base: [line-height];
+
+  /* Colors */
+  --ifm-color-primary: [primary-color];
+  --ifm-color-primary-dark: [darker-primary];
+  --ifm-color-primary-darker: [even-darker-primary];
+  --ifm-color-primary-darkest: [darkest-primary];
+
+  /* Spacing */
+  --ifm-spacing-horizontal: [spacing-unit];
+  --ifm-global-spacing: [global-spacing];
+
+  /* Responsive breakpoints */
+  --ifm-container-width: [max-width];
+  --ifm-container-width-xl: [extra-large-width];
+}
+```
+
+## Configuration Schema Contract
+
+### docusaurus.config.js requirements
+- Must preserve existing `docs` plugin configuration
+- Navbar configuration must maintain existing links
+- Sidebar configuration must maintain existing hierarchy
+- Theme configuration must support custom CSS
