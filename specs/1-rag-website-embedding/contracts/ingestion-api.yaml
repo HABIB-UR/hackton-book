@@ -1,0 +1,68 @@
+# Ingestion API Contract
+
+## Endpoints
+
+### POST /ingest
+Initiates the website content ingestion process
+
+**Request Body:**
+```json
+{
+  "website_url": "string, required",
+  "chunk_size": "integer, optional, default: 512",
+  "recreate_collection": "boolean, optional, default: false"
+}
+```
+
+**Response:**
+```json
+{
+  "job_id": "string",
+  "status": "string",
+  "pages_to_process": "integer",
+  "estimated_duration": "string"
+}
+```
+
+### GET /ingest/{job_id}
+Gets the status of an ingestion job
+
+**Response:**
+```json
+{
+  "job_id": "string",
+  "status": "string",
+  "pages_processed": "integer",
+  "total_pages": "integer",
+  "progress_percentage": "float",
+  "start_time": "timestamp",
+  "end_time": "timestamp",
+  "errors": "array"
+}
+```
+
+### POST /test-query
+Tests the vector search functionality
+
+**Request Body:**
+```json
+{
+  "query": "string, required",
+  "top_k": "integer, optional, default: 5"
+}
+```
+
+**Response:**
+```json
+{
+  "query": "string",
+  "results": [
+    {
+      "content": "string",
+      "source_url": "string",
+      "source_section": "string",
+      "similarity_score": "float"
+    }
+  ]
+}
+```

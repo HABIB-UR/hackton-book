@@ -1,0 +1,257 @@
+openapi: 3.0.0
+info:
+  title: Simulation Content API
+  description: API for accessing and managing digital twin simulation educational content
+  version: 1.0.0
+
+paths:
+  /simulation-modules:
+    get:
+      summary: Get all simulation modules
+      description: Retrieve a list of all available simulation modules (e.g., Module-1, Module-2)
+      responses:
+        '200':
+          description: List of simulation modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimulationModule'
+
+  /simulation-modules/{moduleId}:
+    get:
+      summary: Get a specific simulation module
+      description: Retrieve details about a specific simulation module by ID
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the simulation module
+      responses:
+        '200':
+          description: Details of the simulation module
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationModule'
+        '404':
+          description: Module not found
+
+  /simulation-modules/{moduleId}/chapters:
+    get:
+      summary: Get chapters in a simulation module
+      description: Retrieve all chapters within a specific simulation module
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the simulation module
+      responses:
+        '200':
+          description: List of chapters in the module
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SimulationChapter'
+
+  /simulation-modules/{moduleId}/chapters/{chapterId}:
+    get:
+      summary: Get a specific chapter
+      description: Retrieve details of a specific chapter by module and chapter ID
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the simulation module
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the chapter
+      responses:
+        '200':
+          description: Details of the simulation chapter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulationChapter'
+        '404':
+          description: Chapter not found
+
+  /simulation-modules/{moduleId}/chapters/{chapterId}/assessment:
+    get:
+      summary: Get assessment for a chapter
+      description: Retrieve the assessment quiz for a specific chapter
+      parameters:
+        - name: moduleId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the simulation module
+        - name: chapterId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: ID of the chapter
+      responses:
+        '200':
+          description: Assessment quiz for the chapter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssessmentQuiz'
+        '404':
+          description: Assessment not found
+
+components:
+  schemas:
+    SimulationModule:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - chapters
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the module
+          example: "module-2"
+        title:
+          type: string
+          description: Title of the simulation module
+          example: "Digital Twin Simulation (Gazebo & Unity)"
+        description:
+          type: string
+          description: Brief description of the module
+          example: "Learn Gazebo physics, Unity rendering, and sensor simulation for humanoid robots"
+        chapters:
+          type: array
+          description: List of chapters in this module
+          items:
+            $ref: '#/components/schemas/SimulationChapter'
+        prerequisites:
+          type: array
+          description: Prerequisites for this module
+          items:
+            type: string
+          example: ["Module-1: ROS 2 Nervous System"]
+
+    SimulationChapter:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - learningObjectives
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+          example: "gazebo-physics-simulation"
+        title:
+          type: string
+          description: Title of the chapter
+          example: "Gazebo Physics Simulation"
+        content:
+          type: string
+          description: The educational content in markdown format
+        learningObjectives:
+          type: array
+          description: Learning objectives for this chapter
+          items:
+            type: string
+          example: ["Understand gravity configuration for humanoid robots", "Configure joints and constraints"]
+        duration:
+          type: integer
+          description: Estimated completion time in minutes
+          example: 45
+        difficultyLevel:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          description: Difficulty level of the chapter
+        examples:
+          type: array
+          description: List of practical examples in this chapter
+          items:
+            type: string
+          example: ["gazebo_basic_setup.py", "humanoid_joint_config.urdf"]
+        assessmentId:
+          type: string
+          description: ID of the associated assessment quiz
+
+    AssessmentQuiz:
+      type: object
+      required:
+        - id
+        - title
+        - questions
+        - passingScore
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the quiz
+          example: "gazebo-quiz"
+        title:
+          type: string
+          description: Title of the assessment quiz
+          example: "Gazebo Physics Simulation Quiz"
+        chapterId:
+          type: string
+          description: ID of the associated chapter
+          example: "gazebo-physics-simulation"
+        questions:
+          type: array
+          description: List of questions in the quiz
+          items:
+            $ref: '#/components/schemas/QuizQuestion'
+        passingScore:
+          type: integer
+          description: Minimum score required to pass (percentage)
+          example: 80
+        timeLimit:
+          type: integer
+          description: Time limit in minutes (0 for no limit)
+          example: 0
+
+    QuizQuestion:
+      type: object
+      required:
+        - id
+        - questionText
+        - questionType
+        - correctAnswer
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the question
+        questionText:
+          type: string
+          description: The question text
+        questionType:
+          type: string
+          enum: [multiple_choice, true_false, short_answer]
+          description: Type of question
+        options:
+          type: array
+          description: Available options (for multiple choice)
+          items:
+            type: string
+        correctAnswer:
+          type: string
+          description: The correct answer
+        explanation:
+          type: string
+          description: Explanation of the correct answer

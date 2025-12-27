@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  title: VLA Module Content API
+  description: API for accessing educational content in the Vision-Language-Action module
+  version: 1.0.0
+
+paths:
+  /api/content/{chapter}:
+    get:
+      summary: Retrieve chapter content in structured format
+      parameters:
+        - name: chapter
+          in: path
+          required: true
+          description: Chapter identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chapter content retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: Unique chapter identifier
+                  title:
+                    type: string
+                    description: Chapter title
+                  content:
+                    type: string
+                    description: Chapter content in markdown format
+                  objectives:
+                    type: array
+                    items:
+                      type: string
+                    description: Learning objectives for the chapter
+                  examples:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Example'
+                  exercises:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Exercise'
+        '404':
+          description: Chapter not found
+
+  /api/query:
+    post:
+      summary: Submit questions for RAG system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                question:
+                  type: string
+                  description: The question to be answered
+                context:
+                  type: string
+                  description: Optional context for the question
+                chapter_filter:
+                  type: string
+                  description: Optional filter to limit search to specific chapter
+      responses:
+        '200':
+          description: Answer generated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  answer:
+                    type: string
+                    description: The generated answer
+                  sources:
+                    type: array
+                    items:
+                      type: string
+                    description: Sources used to generate the answer
+                  confidence:
+                    type: number
+                    format: float
+                    description: Confidence score of the answer (0-1)
+        '400':
+          description: Invalid request format
+
+components:
+  schemas:
+    Example:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique example identifier
+        title:
+          type: string
+          description: Example title
+        description:
+          type: string
+          description: Description of the example
+        code:
+          type: string
+          description: Code snippet or conceptual example
+        explanation:
+          type: string
+          description: Detailed explanation of the example
+
+    Exercise:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique exercise identifier
+        title:
+          type: string
+          description: Exercise title
+        description:
+          type: string
+          description: Detailed description of the exercise
+        objectives:
+          type: array
+          items:
+            type: string
+          description: What students should learn
+        difficulty:
+          type: string
+          enum: [beginner, intermediate, advanced]
+          description: Difficulty level of the exercise
+        expected_outcome:
+          type: string
+          description: What the solution should accomplish
+        hints:
+          type: array
+          items:
+            type: string
+          description: Optional hints for students

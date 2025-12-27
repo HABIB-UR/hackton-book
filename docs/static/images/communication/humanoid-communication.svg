@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <style>
+    .node { fill: #42b549; stroke: #2d7d2d; stroke-width: 2; rx: 10; ry: 10; }
+    .topic { fill: #00c9ff; stroke: #0078d7; stroke-width: 2; rx: 5; ry: 5; }
+    .service { fill: #ff8c00; stroke: #d2691e; stroke-width: 2; rx: 5; ry: 5; }
+    .arrow { stroke: #666; stroke-width: 2; marker-end: url(#arrowhead); }
+    .label { font-family: Arial, sans-serif; font-size: 12px; fill: white; text-anchor: middle; }
+    .label-black { font-family: Arial, sans-serif; font-size: 12px; fill: black; text-anchor: middle; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#666" />
+    </marker>
+  </defs>
+
+  <!-- Sensor Nodes -->
+  <rect x="50" y="50" width="120" height="40" class="node"/>
+  <text x="110" y="75" class="label">Joint Encoders</text>
+
+  <rect x="50" y="110" width="120" height="40" class="node"/>
+  <text x="110" y="135" class="label">IMU Sensor</text>
+
+  <rect x="50" y="170" width="120" height="40" class="node"/>
+  <text x="110" y="195" class="label">Camera</text>
+
+  <!-- Topics -->
+  <rect x="220" y="50" width="120" height="30" class="topic"/>
+  <text x="280" y="70" class="label">/joint_states</text>
+
+  <rect x="220" y="110" width="120" height="30" class="topic"/>
+  <text x="280" y="130" class="label">/imu/data</text>
+
+  <rect x="220" y="170" width="120" height="30" class="topic"/>
+  <text x="280" y="190" class="label">/image_raw</text>
+
+  <!-- Processing Nodes -->
+  <rect x="400" y="50" width="120" height="40" class="node"/>
+  <text x="460" y="75" class="label">State Estimator</text>
+
+  <rect x="400" y="110" width="120" height="40" class="node"/>
+  <text x="460" y="135" class="label">Balance Controller</text>
+
+  <rect x="400" y="170" width="120" height="40" class="node"/>
+  <text x="460" y="195" class="label">Vision Processor</text>
+
+  <!-- Action Topics -->
+  <rect x="220" y="250" width="120" height="30" class="topic"/>
+  <text x="280" y="270" class="label">/walk_goal</text>
+
+  <rect x="220" y="310" width="120" height="30" class="topic"/>
+  <text x="280" y="330" class="label">/cmd_vel</text>
+
+  <!-- Controllers -->
+  <rect x="400" y="250" width="120" height="40" class="node"/>
+  <text x="460" y="275" class="label">Walking Controller</text>
+
+  <rect x="400" y="310" width="120" height="40" class="node"/>
+  <text x="460" y="335" class="label">Velocity Controller</text>
+
+  <!-- Actuator Nodes -->
+  <rect x="600" y="250" width="120" height="40" class="node"/>
+  <text x="660" y="275" class="label">Motor Controllers</text>
+
+  <!-- Service -->
+  <rect x="220" y="380" width="120" height="30" class="service"/>
+  <text x="280" y="400" class="label">/set_pose</text>
+
+  <rect x="400" y="380" width="120" height="40" class="node"/>
+  <text x="460" y="405" class="label">Pose Controller</text>
+
+  <!-- Arrows -->
+  <line x1="170" y1="70" x2="220" y2="65" class="arrow"/>
+  <line x1="170" y1="130" x2="220" y2="125" class="arrow"/>
+  <line x1="170" y1="190" x2="220" y2="185" class="arrow"/>
+
+  <line x1="340" y1="65" x2="400" y2="70" class="arrow"/>
+  <line x1="340" y1="125" x2="400" y2="130" class="arrow"/>
+  <line x1="340" y1="185" x2="400" y2="190" class="arrow"/>
+
+  <line x1="520" y1="270" x2="600" y2="270" class="arrow"/>
+
+  <line x1="170" y1="465" x2="220" y2="465" class="arrow"/>
+  <line x1="340" y1="465" x2="400" y2="465" class="arrow"/>
+
+  <text x="400" y="480" font-family="Arial, sans-serif" font-size="14" fill="black" text-anchor="middle">
+    Humanoid Robot Communication Flow
+  </text>
+</svg>

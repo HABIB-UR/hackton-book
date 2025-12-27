@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300">
+  <style>
+    .node { fill: #42b549; stroke: #2d7d2d; stroke-width: 2; }
+    .middleware { fill: #00c9ff; stroke: #0078d7; stroke-width: 2; }
+    .connection { stroke: #666; stroke-width: 2; stroke-dasharray: 5 5; }
+    .label { font-family: Arial, sans-serif; font-size: 14px; fill: white; text-anchor: middle; }
+  </style>
+
+  <!-- Middleware Bus -->
+  <rect x="100" y="150" width="400" height="30" class="middleware" rx="5" ry="5"/>
+  <text x="300" y="170" class="label">ROS 2 Middleware (DDS)</text>
+
+  <!-- Perception Node -->
+  <rect x="120" y="50" width="100" height="50" class="node" rx="5" ry="5"/>
+  <text x="170" y="80" class="label">Perception</text>
+
+  <!-- Planning Node -->
+  <rect x="250" y="50" width="100" height="50" class="node" rx="5" ry="5"/>
+  <text x="300" y="80" class="label">Planning</text>
+
+  <!-- Control Node -->
+  <rect x="380" y="50" width="100" height="50" class="node" rx="5" ry="5"/>
+  <text x="430" y="80" class="label">Control</text>
+
+  <!-- Connections -->
+  <line x1="170" y1="100" x2="300" y2="150" class="connection"/>
+  <line x1="300" y1="100" x2="300" y2="150" class="connection"/>
+  <line x1="430" y1="100" x2="300" y2="150" class="connection"/>
+
+  <!-- Robot Hardware -->
+  <rect x="200" y="220" width="200" height="50" class="node" rx="5" ry="5"/>
+  <text x="300" y="250" class="label">Robot Hardware</text>
+
+  <!-- Hardware connections -->
+  <line x1="300" y1="180" x2="300" y2="220" class="connection"/>
+
+  <text x="300" y="290" font-family="Arial, sans-serif" font-size="12" fill="black" text-anchor="middle">
+    Distributed Control: Multiple nodes communicate via middleware
+  </text>
+</svg>
